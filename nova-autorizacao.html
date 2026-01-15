@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Autorização - Sistema de Autorização Médica</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-heart-pulse"></i> Autorização Médica
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="bi bi-house"></i> Início
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="nova-autorizacao.html">
+                            <i class="bi bi-file-plus"></i> Nova Autorização
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="autorizacoes.html">
+                            <i class="bi bi-list-ul"></i> Autorizações
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">
+                            <i class="bi bi-file-plus"></i> Nova Autorização Médica
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <form id="formAutorizacao">
+                            <!-- Dados do Paciente -->
+                            <h5 class="mb-3 text-primary">
+                                <i class="bi bi-person"></i> Dados do Paciente
+                            </h5>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="nomePaciente" class="form-label">Nome Completo *</label>
+                                    <input type="text" class="form-control" id="nomePaciente" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="cpfPaciente" class="form-label">CPF *</label>
+                                    <input type="text" class="form-control" id="cpfPaciente" placeholder="000.000.000-00" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="dataNascimento" class="form-label">Data de Nascimento *</label>
+                                    <input type="date" class="form-control" id="dataNascimento" required>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <label for="telefonePaciente" class="form-label">Telefone *</label>
+                                    <input type="tel" class="form-control" id="telefonePaciente" placeholder="(00) 00000-0000" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="emailPaciente" class="form-label">E-mail</label>
+                                    <input type="email" class="form-control" id="emailPaciente">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="cidadePaciente" class="form-label">Cidade *</label>
+                                    <input type="text" class="form-control" id="cidadePaciente" required>
+                                </div>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <!-- Dados do Médico -->
+                            <h5 class="mb-3 text-primary">
+                                <i class="bi bi-person-badge"></i> Dados do Médico Solicitante
+                            </h5>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="nomeMedico" class="form-label">Nome Completo *</label>
+                                    <input type="text" class="form-control" id="nomeMedico" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="crmMedico" class="form-label">CRM *</label>
+                                    <input type="text" class="form-control" id="crmMedico" placeholder="CRM-000000" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="ufCrm" class="form-label">UF CRM *</label>
+                                    <select class="form-select" id="ufCrm" required>
+                                        <option value="">Selecione</option>
+                                        <option value="AC">AC</option>
+                                        <option value="AL">AL</option>
+                                        <option value="AP">AP</option>
+                                        <option value="AM">AM</option>
+                                        <option value="BA">BA</option>
+                                        <option value="CE">CE</option>
+                                        <option value="DF">DF</option>
+                                        <option value="ES">ES</option>
+                                        <option value="GO">GO</option>
+                                        <option value="MA">MA</option>
+                                        <option value="MT">MT</option>
+                                        <option value="MS">MS</option>
+                                        <option value="MG">MG</option>
+                                        <option value="PA">PA</option>
+                                        <option value="PB">PB</option>
+                                        <option value="PR">PR</option>
+                                        <option value="PE">PE</option>
+                                        <option value="PI">PI</option>
+                                        <option value="RJ">RJ</option>
+                                        <option value="RN">RN</option>
+                                        <option value="RS">RS</option>
+                                        <option value="RO">RO</option>
+                                        <option value="RR">RR</option>
+                                        <option value="SC">SC</option>
+                                        <option value="SP">SP</option>
+                                        <option value="SE">SE</option>
+                                        <option value="TO">TO</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <!-- Dados do Tratamento -->
+                            <h5 class="mb-3 text-primary">
+                                <i class="bi bi-medical-kit"></i> Dados do Tratamento
+                            </h5>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="tipoTratamento" class="form-label">Tipo de Tratamento *</label>
+                                    <select class="form-select" id="tipoTratamento" required>
+                                        <option value="">Selecione</option>
+                                        <option value="quimioterapia">Quimioterapia</option>
+                                        <option value="radioterapia">Radioterapia</option>
+                                        <option value="dialise">Diálise</option>
+                                        <option value="fisioterapia">Fisioterapia</option>
+                                        <option value="sessao_psicologica">Sessão Psicológica</option>
+                                        <option value="outro">Outro</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="localTratamento" class="form-label">Local do Tratamento *</label>
+                                    <input type="text" class="form-control" id="localTratamento" placeholder="Nome do hospital/clínica" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="dataInicio" class="form-label">Data de Início *</label>
+                                    <input type="date" class="form-control" id="dataInicio" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="dataFim" class="form-label">Data de Término</label>
+                                    <input type="date" class="form-control" id="dataFim">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="frequencia" class="form-label">Frequência *</label>
+                                    <select class="form-select" id="frequencia" required>
+                                        <option value="">Selecione</option>
+                                        <option value="diaria">Diária</option>
+                                        <option value="alternados">Dias Alternados</option>
+                                        <option value="semanal">Semanal</option>
+                                        <option value="quinzenal">Quinzenal</option>
+                                        <option value="mensal">Mensal</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="enderecoTratamento" class="form-label">Endereço do Local de Tratamento *</label>
+                                <input type="text" class="form-control" id="enderecoTratamento" placeholder="Rua, número, bairro" required>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <label for="cidadeTratamento" class="form-label">Cidade *</label>
+                                    <input type="text" class="form-control" id="cidadeTratamento" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="ufTratamento" class="form-label">UF *</label>
+                                    <select class="form-select" id="ufTratamento" required>
+                                        <option value="">Selecione</option>
+                                        <option value="AC">AC</option>
+                                        <option value="AL">AL</option>
+                                        <option value="AP">AP</option>
+                                        <option value="AM">AM</option>
+                                        <option value="BA">BA</option>
+                                        <option value="CE">CE</option>
+                                        <option value="DF">DF</option>
+                                        <option value="ES">ES</option>
+                                        <option value="GO">GO</option>
+                                        <option value="MA">MA</option>
+                                        <option value="MT">MT</option>
+                                        <option value="MS">MS</option>
+                                        <option value="MG">MG</option>
+                                        <option value="PA">PA</option>
+                                        <option value="PB">PB</option>
+                                        <option value="PR">PR</option>
+                                        <option value="PE">PE</option>
+                                        <option value="PI">PI</option>
+                                        <option value="RJ">RJ</option>
+                                        <option value="RN">RN</option>
+                                        <option value="RS">RS</option>
+                                        <option value="RO">RO</option>
+                                        <option value="RR">RR</option>
+                                        <option value="SC">SC</option>
+                                        <option value="SP">SP</option>
+                                        <option value="SE">SE</option>
+                                        <option value="TO">TO</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="cepTratamento" class="form-label">CEP</label>
+                                    <input type="text" class="form-control" id="cepTratamento" placeholder="00000-000">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="justificativa" class="form-label">Justificativa Médica *</label>
+                                <textarea class="form-control" id="justificativa" rows="4" placeholder="Descreva a justificativa para o tratamento fora de domicílio" required></textarea>
+                            </div>
+
+                            <!-- Botões -->
+                            <div class="d-flex justify-content-between">
+                                <a href="index.html" class="btn btn-secondary">
+                                    <i class="bi bi-arrow-left"></i> Cancelar
+                                </a>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-save"></i> Salvar Autorização
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-light mt-5 py-4">
+        <div class="container text-center">
+            <p class="text-muted mb-0">
+                &copy; 2024 Sistema de Autorização Médica. Desenvolvido para gestão de tratamentos fora de domicílio.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
