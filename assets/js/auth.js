@@ -200,7 +200,7 @@ function fazerLogin() {
 }
 
 // Função para fazer cadastro
-function fazerCadastro() {
+async function fazerCadastro() {
     const email = document.getElementById('email').value;
     const emailConfirmacao = document.getElementById('emailConfirmacao').value;
     const senha = document.getElementById('senha').value;
@@ -349,22 +349,50 @@ function voltarStep1() {
 
 // Função para atualizar navbar com informações do usuário
 function atualizarNavbar() {
-    const navbar = document.querySelector('.navbar-nav');
-    if (navbar && usuarioLogado) {
-        // Verificar se já existe item de logout
-        if (!document.getElementById('navLogout')) {
-            const logoutItem = document.createElement('li');
-            logoutItem.className = 'nav-item';
-            logoutItem.id = 'navLogout';
-            logoutItem.innerHTML = `
-                <div class="nav-link dropdown">
-                    <i class="bi bi-person-circle"></i> ${usuarioLogado.nomeMunicipio || usuarioLogado.nome}
-                    <button class="btn btn-link text-white text-decoration-none p-0 ms-2" onclick="logout()">
+    const navUsuario = document.getElementById('navUsuario');
+    if (!navUsuario) return;
+
+    // Limpar conteúdo anterior
+    navUsuario.innerHTML = '';
+
+    if (usuarioLogado) {
+        // Usuário logado - mostrar dropdown com informações
+        const nomeExibido = usuarioLogado.nome_municipio || usuarioLogado.nomeMunicipio || usuarioLogado.nome || 'Usuário';
+        const emailExibido = usuarioLogado.email || '';
+        
+        navUsuario.innerHTML = `
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle"></i> ${nomeExibido}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li class="px-3 py-2 border-bottom">
+                    <small class="text-muted">Logado como:</small><br>
+                    <strong>${nomeExibido}</strong><br>
+                    <small class="text-muted">${emailExibido}</small>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <a class="dropdown-item" href="perfil.html">
+                        <i class="bi bi-person-gear"></i> Meu Perfil
+                    </a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <a class="dropdown-item text-danger" href="#" onclick="logout(); return false;">
                         <i class="bi bi-box-arrow-right"></i> Sair
-                    </button>
-                </div>
-            `;
-            navbar.appendChild(logoutItem);
-        }
+                    </a>
+                </li>
+            </ul>
+        `;
+    } else {
+        // Usuário não logado - mostrar opções de login/cadastro
+        navUsuario.innerHTML = `
+            <a class="nav-link text-white" href="login.html">
+                <i class="bi bi-box-arrow-in-right"></i> Entrar
+            </a>
+            <a class="nav-link text-white" href="cadastro.html">
+                <i class="bi bi-person-plus"></i> Cadastrar
+            </a>
+        `;
     }
 }

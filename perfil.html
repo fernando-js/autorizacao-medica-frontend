@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - Sistema de Autorização Médica</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-heart-pulse"></i> Autorização Médica
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="bi bi-house"></i> Início
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="nova-autorizacao.html">
+                            <i class="bi bi-file-plus"></i> Nova Autorização
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tratamento-fora-domicilio.html">
+                            <i class="bi bi-house-heart"></i> Tratamento Fora de Domicílio
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="autorizacoes.html">
+                            <i class="bi bi-list-ul"></i> Autorizações
+                        </a>
+                    </li>
+                    <!-- Usuário Logado ou Login/Cadastro -->
+                    <li class="nav-item dropdown" id="navUsuario">
+                        <!-- Será preenchido via JavaScript -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">
+                            <i class="bi bi-person-circle"></i> Meu Perfil
+                        </h4>
+                    </div>
+                    <div class="card-body p-5">
+                        <!-- Tabs -->
+                        <ul class="nav nav-tabs mb-4" id="perfilTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="dados-tab" data-bs-toggle="tab" data-bs-target="#dados" type="button" role="tab">
+                                    <i class="bi bi-person"></i> Dados Pessoais
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="municipio-tab" data-bs-toggle="tab" data-bs-target="#municipio" type="button" role="tab">
+                                    <i class="bi bi-building"></i> Dados do Município
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="senha-tab" data-bs-toggle="tab" data-bs-target="#senha" type="button" role="tab">
+                                    <i class="bi bi-lock"></i> Alterar Senha
+                                </button>
+                            </li>
+                        </ul>
+
+                        <!-- Tab Content -->
+                        <div class="tab-content" id="perfilTabsContent">
+                            <!-- Dados Pessoais -->
+                            <div class="tab-pane fade show active" id="dados" role="tabpanel">
+                                <form id="formDadosPessoais">
+                                    <h5 class="mb-3 text-primary">Dados Pessoais</h5>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="perfilNome" class="form-label">Nome Completo *</label>
+                                            <input type="text" class="form-control" id="perfilNome" required>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="perfilCPF" class="form-label">CPF</label>
+                                            <input type="text" class="form-control" id="perfilCPF" placeholder="000.000.000-00">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="perfilDataNascimento" class="form-label">Data de Nascimento</label>
+                                            <input type="date" class="form-control" id="perfilDataNascimento">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="perfilTelefone" class="form-label">Telefone</label>
+                                            <input type="tel" class="form-control" id="perfilTelefone" placeholder="(00) 00000-0000">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="perfilEmail" class="form-label">E-mail *</label>
+                                            <input type="email" class="form-control" id="perfilEmail" required>
+                                            <small class="form-text text-muted">E-mail usado para login</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="bi bi-save"></i> Salvar Alterações
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Dados do Município -->
+                            <div class="tab-pane fade" id="municipio" role="tabpanel">
+                                <form id="formDadosMunicipio">
+                                    <h5 class="mb-3 text-primary">Dados do Município</h5>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="perfilNomeMunicipio" class="form-label">Nome do Município *</label>
+                                            <input type="text" class="form-control" id="perfilNomeMunicipio" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="perfilCNPJ" class="form-label">CNPJ *</label>
+                                            <input type="text" class="form-control" id="perfilCNPJ" placeholder="00.000.000/0000-00" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label for="perfilUF" class="form-label">UF *</label>
+                                            <select class="form-select" id="perfilUF" required>
+                                                <option value="">Selecione</option>
+                                                <option value="AC">AC</option>
+                                                <option value="AL">AL</option>
+                                                <option value="AP">AP</option>
+                                                <option value="AM">AM</option>
+                                                <option value="BA">BA</option>
+                                                <option value="CE">CE</option>
+                                                <option value="DF">DF</option>
+                                                <option value="ES">ES</option>
+                                                <option value="GO">GO</option>
+                                                <option value="MA">MA</option>
+                                                <option value="MT">MT</option>
+                                                <option value="MS">MS</option>
+                                                <option value="MG">MG</option>
+                                                <option value="PA">PA</option>
+                                                <option value="PB">PB</option>
+                                                <option value="PR">PR</option>
+                                                <option value="PE">PE</option>
+                                                <option value="PI">PI</option>
+                                                <option value="RJ">RJ</option>
+                                                <option value="RN">RN</option>
+                                                <option value="RS">RS</option>
+                                                <option value="RO">RO</option>
+                                                <option value="RR">RR</option>
+                                                <option value="SC">SC</option>
+                                                <option value="SP">SP</option>
+                                                <option value="SE">SE</option>
+                                                <option value="TO">TO</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <label for="perfilCidade" class="form-label">Cidade *</label>
+                                            <input type="text" class="form-control" id="perfilCidade" required>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="bi bi-save"></i> Salvar Alterações
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Alterar Senha -->
+                            <div class="tab-pane fade" id="senha" role="tabpanel">
+                                <form id="formAlterarSenha">
+                                    <h5 class="mb-3 text-primary">Alterar Senha</h5>
+                                    <div class="mb-3">
+                                        <label for="senhaAtual" class="form-label">Senha Atual *</label>
+                                        <input type="password" class="form-control" id="senhaAtual" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="novaSenhaPerfil" class="form-label">Nova Senha *</label>
+                                        <input type="password" class="form-control" id="novaSenhaPerfil" placeholder="Mínimo 8 caracteres" required minlength="8">
+                                        <small class="form-text text-muted">Mínimo 8 caracteres</small>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="confirmarNovaSenhaPerfil" class="form-label">Confirmar Nova Senha *</label>
+                                        <input type="password" class="form-control" id="confirmarNovaSenhaPerfil" placeholder="Digite a senha novamente" required minlength="8">
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="bi bi-save"></i> Alterar Senha
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-light mt-5 py-4">
+        <div class="container text-center">
+            <p class="text-muted mb-0">
+                &copy; 2026 Sistema de Autorização Médica. Desenvolvido para gestão de tratamentos fora de domicílio.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/perfil.js"></script>
+</body>
+</html>
