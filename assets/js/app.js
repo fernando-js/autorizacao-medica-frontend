@@ -69,12 +69,61 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Submissão do formulário
+    // Submissão do formulário de autorização
     const formAutorizacao = document.getElementById('formAutorizacao');
     if (formAutorizacao) {
         formAutorizacao.addEventListener('submit', function(e) {
             e.preventDefault();
             criarAutorizacao();
+        });
+    }
+
+    // Submissão do formulário de tratamento fora de domicílio
+    const formTratamentoForaDomicilio = document.getElementById('formTratamentoForaDomicilio');
+    if (formTratamentoForaDomicilio) {
+        formTratamentoForaDomicilio.addEventListener('submit', function(e) {
+            e.preventDefault();
+            criarTratamentoForaDomicilio();
+        });
+    }
+
+    // Máscaras para tratamento fora de domicílio
+    const cpfInputTFD = document.querySelector('#formTratamentoForaDomicilio #cpfPaciente');
+    if (cpfInputTFD) {
+        cpfInputTFD.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+                e.target.value = value;
+            }
+        });
+    }
+
+    const telInputTFD = document.querySelector('#formTratamentoForaDomicilio #telefonePaciente');
+    if (telInputTFD) {
+        telInputTFD.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                if (value.length <= 10) {
+                    value = value.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+                } else {
+                    value = value.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+                }
+                e.target.value = value;
+            }
+        });
+    }
+
+    const cepInputTFD = document.querySelector('#formTratamentoForaDomicilio #cepTratamento');
+    if (cepInputTFD) {
+        cepInputTFD.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 8) {
+                value = value.replace(/(\d{5})(\d)/, '$1-$2');
+                e.target.value = value;
+            }
         });
     }
 
@@ -94,6 +143,9 @@ document.addEventListener('DOMContentLoaded', function() {
 function criarAutorizacao() {
     const autorizacao = {
         id: Date.now(),
+        numeroProtocolo: document.getElementById('numeroProtocolo')?.value || '',
+        dataProtocolo: document.getElementById('dataProtocolo')?.value || '',
+        tipo: 'autorizacao',
         paciente: {
             nome: document.getElementById('nomePaciente').value,
             cpf: document.getElementById('cpfPaciente').value,
@@ -127,6 +179,49 @@ function criarAutorizacao() {
     salvarAutorizacoes();
 
     alert('Autorização criada com sucesso!');
+    window.location.href = 'index.html';
+}
+
+// Função para criar tratamento fora de domicílio
+function criarTratamentoForaDomicilio() {
+    const tratamento = {
+        id: Date.now(),
+        numeroProtocolo: document.getElementById('numeroProtocolo').value,
+        dataProtocolo: document.getElementById('dataProtocolo').value,
+        tipo: 'tratamento_fora_domicilio',
+        paciente: {
+            nome: document.getElementById('nomePaciente').value,
+            cpf: document.getElementById('cpfPaciente').value,
+            dataNascimento: document.getElementById('dataNascimento').value,
+            telefone: document.getElementById('telefonePaciente').value,
+            email: document.getElementById('emailPaciente').value,
+            cidade: document.getElementById('cidadePaciente').value
+        },
+        medico: {
+            nome: document.getElementById('nomeMedico').value,
+            crm: document.getElementById('crmMedico').value,
+            ufCrm: document.getElementById('ufCrm').value
+        },
+        tratamento: {
+            tipo: document.getElementById('tipoTratamento').value,
+            local: document.getElementById('localTratamento').value,
+            dataInicio: document.getElementById('dataInicio').value,
+            dataFim: document.getElementById('dataFim').value,
+            frequencia: document.getElementById('frequencia').value,
+            endereco: document.getElementById('enderecoTratamento').value,
+            cidade: document.getElementById('cidadeTratamento').value,
+            uf: document.getElementById('ufTratamento').value,
+            cep: document.getElementById('cepTratamento').value,
+            justificativa: document.getElementById('justificativa').value
+        },
+        status: 'pendente',
+        dataCriacao: new Date().toISOString().split('T')[0]
+    };
+
+    autorizacoes.push(tratamento);
+    salvarAutorizacoes();
+
+    alert('Tratamento Fora de Domicílio criado com sucesso!');
     window.location.href = 'index.html';
 }
 
@@ -255,6 +350,14 @@ function verDetalhes(id) {
     }
 
     modalBody.innerHTML = `
+        ${autorizacao.numeroProtocolo ? `
+        <div class="mb-3">
+            <h6 class="text-primary">Protocolo</h6>
+            <p><strong>Número:</strong> ${autorizacao.numeroProtocolo}</p>
+            <p><strong>Data:</strong> ${autorizacao.dataProtocolo ? new Date(autorizacao.dataProtocolo).toLocaleDateString('pt-BR') : 'N/A'}</p>
+        </div>
+        <hr>
+        ` : ''}
         <div class="row mb-3">
             <div class="col-md-6">
                 <h6 class="text-primary">Dados do Paciente</h6>
